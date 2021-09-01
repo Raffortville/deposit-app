@@ -1,0 +1,14 @@
+$textColor :#323232;
+$textSecondaryColor : #cccccc;
+$primary : #3f50b5;
+$primaryLight : #757ce8;
+
+
+@mixin flex ($direction, $justify, $align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+
