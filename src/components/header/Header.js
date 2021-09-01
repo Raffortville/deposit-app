@@ -17,8 +17,6 @@ const Header = () => {
         dispatch(logOut(userToken))
     }
 
-    console.log(window.localStorage.getItem('token'))
-
     return (
         <div className='header'>
            <h3 className='header-title'>Dashboard</h3> 

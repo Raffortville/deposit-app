@@ -5,6 +5,7 @@ const initialState = {
     user : {},
     isLogged : false,
     errorLog : false,
+    loading : false,
 
 }
 
@@ -15,7 +16,8 @@ const usersSlice = createSlice({
         getUsers:(state, {payload}) => {state.users = payload},
         setUser: (state, {payload}) => {state.user = payload },
         userLogged: (state, {payload}) => {state.isLogged = payload},
-        setErrorLog: (state, {payload}) => {state.errorLog = payload}
+        setErrorLog: (state, {payload}) => {state.errorLog = payload},
+        setLoading : (state, {payload}) => {state.loading = payload}
     }
 })
 
@@ -62,9 +64,7 @@ export const logOut = (payload) => async dispatch => {
         if (response.status === 200) {
             window.localStorage.removeItem('token')
             dispatch(userLogged(false))
-           
         }
-
 
     } catch (error) {
         console.log(error)
@@ -72,8 +72,10 @@ export const logOut = (payload) => async dispatch => {
 }
 
 export const fetchUsers = payload => async dispatch => {
-    try {
 
+    dispatch(setLoading(true))
+
+    try {
         const response = await fetch('/users', {
             method :'GET',
             headers: {
@@ -83,14 +85,45 @@ export const fetchUsers = payload => async dispatch => {
             }
         })
 
-        console.log(response)
+        if (response.status === 200) {
+            const data = await response.json()
+            dispatch(getUsers(data.data.items)) 
+        } 
+
+        dispatch(setLoading(false))
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchUserById = (payload, userId) => async dispatch => {
+
+    dispatch(setLoading(true))
+
+    try {
+        const response = await fetch(`/users/view/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+                'Authorization':  `Bearer ${payload}` 
+            }
+        })
+
+        if (response.status === 200) {
+            const data = await response.json()
+            dispatch(setUser(data.data.User))
+        }
+
+        dispatch(setLoading(false))
         
     } catch (error) {
         console.log(error)
     }
 }
 
-export const { getUsers, setUser, userLogged, setErrorLog} = usersSlice.actions
+export const { getUsers, setUser, userLogged, setErrorLog, setLoading} = usersSlice.actions
 
 
 export default usersSlice.reducer

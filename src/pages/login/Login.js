@@ -25,9 +25,7 @@ const Login = () => {
         setUser({...user, [name]: value})
     }
 
-    if (isUserLogged) return <Redirect to='/dashboard'/>
-
-    console.log(isUserLogged)
+   if (isUserLogged) return <Redirect to='/dashboard'/>
    
     return (
         <div className='container-login'>

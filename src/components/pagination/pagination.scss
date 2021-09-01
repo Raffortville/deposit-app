@@ -1,0 +1,17 @@
+@import '../../style/variables.scss';
+
+.pagination {
+    margin-top: 10px;
+    cursor: pointer;
+    color: $primary;
+    font-size: 20px;
+    font-weight: 600;
+    @include flex(row, space-around,center);
+
+    .pagination-number {
+        margin: 0 7px;
+        padding: 0px 5px;
+        border-bottom: 1px solid $primaryLight;
+    }
+
+}

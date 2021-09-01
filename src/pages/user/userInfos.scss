@@ -1,0 +1,27 @@
+@import '../../style/variables.scss';
+
+.container-userInfos {
+    margin-top: 50px;
+    @include flex(column, flex-start, center);
+
+    .userInfos-card {
+        padding: 15px;
+        box-shadow: 0 0 5px 1px #bdbdbd;
+        border-radius: 15px;
+        width: 500px;
+        background-color: white;
+        margin-top: 15px;
+        @include flex(column, flex-start, center)
+    }
+
+    .userInfos-list{
+        list-style: none;
+        width: 80%;
+    }
+
+    .userInfos-card-field {
+        @include flex (row, space-between, center);
+       width: 100%; 
+       margin: 15px 0px;
+    }
+}

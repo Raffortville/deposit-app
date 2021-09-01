@@ -1,0 +1,6 @@
+@import '../../style/variables.scss';
+
+.container-dashboard {
+    @include flex(column, center, center);
+    margin-top: 50px;
+}

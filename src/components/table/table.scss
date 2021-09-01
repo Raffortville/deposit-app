@@ -1,0 +1,14 @@
+@import '../../style/variables.scss';
+
+
+.table-actions {
+    @include flex (row, flex-start, center)
+
+}
+
+.table-icon {
+    cursor: pointer;
+    color: $primary;
+    font-size: 12px;
+    margin: 0 5px;
+}
