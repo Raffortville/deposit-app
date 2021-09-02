@@ -8,6 +8,22 @@
     .table {
         width: 950px;
         height: 250px;
+
+        .table-filter-cell {
+            @include flex (row, center, center)
+        }
+
+        .icon-filter {
+            cursor: pointer;
+            opacity: 0.7;
+            transform: rotate(0);
+            transition: all 400ms;
+        }
+
+        .icon-filter:hover {
+            transform: rotate(90deg);
+        }
+
     
         .table-actions {
             @include flex (row, flex-start, center)

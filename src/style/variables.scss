@@ -11,4 +11,11 @@ $primaryLight : #757ce8;
     align-items: $align;
 }
 
+@mixin flexCenter ($direction: 'row') {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
 

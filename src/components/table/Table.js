@@ -6,6 +6,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import EditIcon from '@material-ui/icons/Edit'
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 
 import ModalUserForm from '../modal/ModalUserForm'
 import { fetchUserById, setUser } from '../../store/userStore'
@@ -34,12 +35,26 @@ const  TablePanel = props =>  {
         <Table  className='table'>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
+              <TableCell> 
+                <div className='table-filter-cell'>Name 
+                  <KeyboardArrowRightIcon 
+                    className='icon-filter' 
+                    onClick={() => props.sortArray('name')}
+                  />
+                </div>
+              </TableCell>
               <TableCell align="center">Nickname</TableCell>
               <TableCell align="center">Email</TableCell>
               <TableCell align="center">Status</TableCell>
               <TableCell align="center">Level</TableCell>
-              <TableCell align="center">Min bet</TableCell>
+              <TableCell align="center">
+                <div className='table-filter-cell'>Min-bet 
+                  <KeyboardArrowRightIcon 
+                    className='icon-filter' 
+                    onClick={() => props.sortArray('min_bet')}
+                  />
+                </div>
+              </TableCell>
               <TableCell align="center">Max bet</TableCell>
               <TableCell align="center">Amount</TableCell>
               <TableCell align="center">Actions</TableCell>
