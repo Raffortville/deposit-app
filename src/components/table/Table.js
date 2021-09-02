@@ -12,8 +12,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Tooltip } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import EditIcon from '@material-ui/icons/Edit';
-import ModalInfos from '../modal/ModalInfos';
+import ModalUserForm from '../modal/ModalUserForm';
 
 import './table.scss'
 
@@ -30,15 +31,15 @@ const  TablePanel = props =>  {
   const classes = useStyles();
   const history = useHistory()
 
-  const {users }= props
+  const {users}= props
 
   const userToken = window.localStorage.getItem('token')
 
   const dispatch = useDispatch()
 
   const [openModal, setOpenModal] = useState(false)
+  const [depositForm, setDepositForm] = useState(false)
 
-  console.log(users)
 
   return (
 
@@ -55,6 +56,7 @@ const  TablePanel = props =>  {
             <TableCell align="center">Level</TableCell>
             <TableCell align="center">Min bet</TableCell>
             <TableCell align="center">Max bet</TableCell>
+            <TableCell align="center">Amount</TableCell>
             <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
@@ -70,27 +72,38 @@ const  TablePanel = props =>  {
               <TableCell align="right">{user.level}</TableCell>
               <TableCell align="right">{user.min_bet}</TableCell>
               <TableCell align="right">{user.max_bet}</TableCell>
+              <TableCell align="right">{user?.amount ? user.amount : '0'}</TableCell>
               <TableCell align="right">
                 <div className='table-actions'>
                   <Tooltip title='See users infos'>
                     <VisibilityIcon 
                       className='table-icon' 
                       onClick={() => {
-                      dispatch(fetchUserById(userToken, user.id))
-                      history.push(`/infos/${user.id}`)
-                    }}
+                        dispatch(fetchUserById(userToken, user.id))
+                        history.push(`/infos/${user.id}`)
+                      }}
                   />
                   </Tooltip>
-                  <Tooltip title='See users infos'>
+                  <Tooltip title='Edit users infos'>
                     <EditIcon 
                       className='table-icon' 
                       onClick={() => {
                         dispatch(setUser(user))
+                        setDepositForm(false)
                         setOpenModal(true)
-                    }}
+                      }}
                   />
                   </Tooltip>
-                  
+                  <Tooltip title='Deposit money'>
+                    <MonetizationOnIcon
+                      className='table-icon' 
+                      onClick={() => {
+                        dispatch(setUser(user))
+                        setDepositForm(true)
+                        setOpenModal(true)
+                      }}
+                  />
+                  </Tooltip>
                 </div>
               </TableCell>
             </TableRow>
@@ -98,7 +111,7 @@ const  TablePanel = props =>  {
         </TableBody>
       </Table>
     </TableContainer>
-      {openModal && <ModalInfos closeModal={()=> setOpenModal(false)}/>}
+      {openModal && <ModalUserForm closeModal={()=> setOpenModal(false)} depositForm={depositForm}/>}
     </>
    
   );

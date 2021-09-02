@@ -12,8 +12,6 @@ function App() {
 
   const dispatch = useDispatch()
   const userToken = window.localStorage.getItem('token')
-  
-  console.log(userToken)
 
   useEffect(() => {
     if((userToken !== null)) {
@@ -23,7 +21,7 @@ function App() {
     } else {
       dispatch(userLogged(false)) 
     }
-  },[userToken])
+  },[])
   
 
   return (

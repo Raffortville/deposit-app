@@ -9,8 +9,6 @@ const UserInfos = props => {
     const user = useSelector(state => state.users.user)
     const isLoading = useSelector(state => state.users.loading)
 
-    console.log(user)
-
     return (
         <div className='container-userInfos'>
             {isLoading 
@@ -53,6 +51,11 @@ const UserInfos = props => {
                                 <li>
                                     <div className='userInfos-card-field'>
                                         <p>Max bet</p> <h4>{user.max_bet}</h4>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className='userInfos-card-field'>
+                                        <p>Max bet</p> <h4>{user?.amount ? user.amount : '0'}</h4>
                                     </div>
                                 </li>
                                 <li>

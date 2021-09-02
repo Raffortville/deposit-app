@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import TablePanel from '../../components/table/Table'
 import { Redirect } from 'react-router-dom'
 import Spinner from '../../components/spinner/Spinner'
@@ -9,8 +9,6 @@ import './dashboard.scss'
 
 
 const Dashboard = () => {
-
-    const dispatch = useDispatch()
 
     const isUserLogged = useSelector(state => state.users.isLogged)
     const users = useSelector(state => state.users.users)
