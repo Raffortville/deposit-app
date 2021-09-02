@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+
+import { TextField, Button } from '@material-ui/core'
 import { loggUser } from '../../store/userStore'
 import AlertMessage from '../../components/alert/Alert'
 
 import './Login.scss'
-
-/*{email : "raffihaycan@gmail.com",password : "!?p6]]tC%zH5f5ET" }*/
 
 const Login = () => {
 
@@ -16,8 +15,7 @@ const Login = () => {
     const errorLog = useSelector(state => state.users.errorLog)
     const isUserLogged = useSelector(state => state.users.isLogged)
     
-
-    const initialState = {email:'', password:''}
+    const initialState = {email:'raffihaycan@gmail.com', password: '!?p6]]tC%zH5f5ET'}
     const [user, setUser] = useState(initialState)
    
     const handleChange = event => {
@@ -25,6 +23,7 @@ const Login = () => {
         setUser({...user, [name]: value})
     }
 
+    /* Once user is logged we redirect to Dashboard */
    if (isUserLogged) return <Redirect to='/dashboard'/>
    
     return (
@@ -36,8 +35,7 @@ const Login = () => {
                     name='email'
                     type='email'
                     value={user.email}
-                    onChange={(e)=> handleChange(e)}
-                    
+                    onChange={(e) => handleChange(e)}
                 />
             </div>
             <div className='loggin-input'>
@@ -45,8 +43,8 @@ const Login = () => {
                     label='Password'
                     name='password'
                     type='password'
-                    
-                    onChange={(e)=> handleChange(e)}
+                    value={user.password}
+                    onChange={(e) => handleChange(e)}
                 />
             </div>
             <div className='loggin-button'>
@@ -54,9 +52,7 @@ const Login = () => {
                     className='button-primary' 
                     variant='contained'
                     color='primary'
-                    onClick={()=> {
-                        dispatch(loggUser({email : "raffihaycan@gmail.com",password : "!?p6]]tC%zH5f5ET" }))
-                    }}
+                    onClick={() => dispatch(loggUser(user))}
                 >
                 OK
                 </Button>

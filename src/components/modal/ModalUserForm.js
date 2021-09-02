@@ -1,47 +1,47 @@
-import React,{useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateUserToDb, makeDeposit } from '../../store/userStore';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { TextField } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import ClearIcon from '@material-ui/icons/Clear';
-import { isStringEmpty } from '../../helpers/checkFormat';
+import React,{useEffect, useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core'
+import ClearIcon from '@material-ui/icons/Clear'
+
+import { updateUserToDb, makeDeposit } from '../../store/userStore'
+import { isStringEmpty } from '../../helpers/checkFormat'
 
 import './modal.scss'
 
 const ModalUserForm = props => {
+    const {depositForm} = props
+
+    const dispatch = useDispatch()
 
     const token = window.localStorage.getItem('token')
-
-    const {depositForm} = props
 
     const user = useSelector(state => state.users.user)
     const [userState, setUserState] = useState(user)
 
+    /* in case of first deposit we add new properties to userState object */
     useEffect(() => {
         depositForm && setUserState({...userState, amount: 0, notes: ['new'], user_id : user.id})
 
     },[depositForm])
 
 
-    const dispatch = useDispatch()
-
     const handleChange = e => {
+
         const {name, value} = e.target
         setUserState({...userState,[name]: value})
     }
 
     const handleSubmit = () => {
 
+        /* form valid empty format */
         if (!isStringEmpty(userState.name) && !isStringEmpty(userState.status) && !isStringEmpty(userState.status) && !isStringEmpty(userState.language_id)) {
             dispatch(updateUserToDb(userState, token))
             props.closeModal()
         }
     }
 
+    /* submit function for post deposit */
     const handleSubmitDeposit = () => {
 
         if (!isStringEmpty(userState.amount)) {

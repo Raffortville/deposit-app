@@ -8,26 +8,24 @@ const Pagination = props => {
 
     const pageNumbers = []
 
+    /* loop for page number count */
     for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) {
-        pageNumbers.push(i);
+        pageNumbers.push(i)
     }
 
-
-    return (
-        <div>
-            <nav>
-                <ul className='pagination'>
-                    {pageNumbers.map(number => (
-                        <div 
-                            className='pagination'
-                            key={number} 
-                            onClick={() => props.paginate(number)}
-                        >
-                            <div className='pagination-number'>{number}</div>
-                        </div>
-                    ))}
-                </ul>
-            </nav>
+    return (            
+        <div className='pagination'>
+            {pageNumbers.map(number => (
+                <div 
+                    className='pagination'
+                    key={number} 
+                    onClick={() => props.paginate(number)}
+                >
+                    <div className='pagination-number'>
+                        {number}
+                    </div>
+                </div>
+            ))}
         </div>
     )
 }

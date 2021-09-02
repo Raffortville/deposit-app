@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
-import TablePanel from '../../components/table/Table'
 import { Redirect } from 'react-router-dom'
+
+import TablePanel from '../../components/table/Table'
 import Spinner from '../../components/spinner/Spinner'
 import Pagination from '../../components/pagination/Pagination'
 
@@ -14,19 +15,22 @@ const Dashboard = () => {
     const users = useSelector(state => state.users.users)
     const isLoading = useSelector(state => state.users.loading)
 
+    /* states for front pagination */
     const [currentPage, setCurrentPage] = useState(1)
-    const usersPerPage = 3
 
+    /* constants for front pagination */
+    const usersPerPage = 3
     const indexOfLastPost = currentPage * usersPerPage;
     const indexOfFirstPost = indexOfLastPost - usersPerPage;
     const currentUsers = users.slice(indexOfFirstPost, indexOfLastPost)
 
+    /* function for front pagination */
+    const paginate = pageNumber => setCurrentPage(pageNumber)
 
-    const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    /* if user is not logged is pushed to login page (root) */
     if (!isUserLogged) return <Redirect to='/'/>
 
- 
     return(
         <div className='container-dashboard'>
             {isLoading 

@@ -4,7 +4,7 @@ import Spinner from '../../components/spinner/Spinner'
 
 import './userInfos.scss'
 
-const UserInfos = props => {
+const UserInfos = () => {
 
     const user = useSelector(state => state.users.user)
     const isLoading = useSelector(state => state.users.loading)
@@ -55,7 +55,7 @@ const UserInfos = props => {
                                 </li>
                                 <li>
                                     <div className='userInfos-card-field'>
-                                        <p>Max bet</p> <h4>{user?.amount ? user.amount : '0'}</h4>
+                                        <p>Amount</p> <h4>{user?.amount ? user.amount : '0'}</h4>
                                     </div>
                                 </li>
                                 <li>
@@ -69,16 +69,6 @@ const UserInfos = props => {
                                     </div>
                                 </li>
                             </ul>
-                           
-                            
-                            
-                           
-                            
-                            
-                            
-                           
-                            
-
                         </div>
                     </>
                     

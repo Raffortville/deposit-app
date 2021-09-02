@@ -8,11 +8,12 @@ import Header from './components/header/Header'
 import UserInfos from './pages/user/UserInfos';
 
 
-function App() {
+const App = () => {
 
   const dispatch = useDispatch()
   const userToken = window.localStorage.getItem('token')
 
+  /* in refresh case we grab token from localStorage to check user logged status*/
   useEffect(() => {
     if((userToken !== null)) {
       dispatch(userLogged(true))
@@ -21,7 +22,8 @@ function App() {
     } else {
       dispatch(userLogged(false)) 
     }
-  },[])
+
+  },[userToken, dispatch])
   
 
   return (
